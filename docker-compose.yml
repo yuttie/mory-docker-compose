@@ -1,0 +1,21 @@
+services:
+  mory:
+    image: yuttie/mory:latest
+    ports:
+      - 127.0.0.1:8080:80
+    environment:
+      VUE_APP_APPLICATION_ROOT: /
+      VUE_APP_API_URL: http://127.0.0.1:3030/
+  moried:
+    image: yuttie/moried:latest
+    ports:
+      - 127.0.0.1:3030:3030
+    volumes:
+      - ./notes:/repo
+    user: ${UID}:${GID}
+    environment:
+      MORIED_ROOT_PATH: /
+      MORIED_SECRET: SERVER_SECRET
+      MORIED_USER_NAME: user
+      MORIED_USER_EMAIL: user@example.com
+      MORIED_USER_HASH: $$argon2i$$v=19$$m=4096,t=3,p=1$$L3ErMHBrYVZIYlR2MVNqQg$$Xa8Ulk+UmZjULF+g9WT0qjxgIkuFLgi4H5Hn35WYWiU
